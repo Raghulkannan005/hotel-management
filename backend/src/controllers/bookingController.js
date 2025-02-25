@@ -7,7 +7,7 @@ export const bookRoom = async (req, res, next) => {
         res.status(201).json(booking);
     } catch (error) {
         next(error);
-    }
+    } 
 };
 
 export const getBookingHistory = async (req, res, next) => {
