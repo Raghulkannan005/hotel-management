@@ -32,7 +32,7 @@ const Booking = () => {
     {
       id: 'deluxe',
       name: 'Deluxe Room',
-      price: 199,
+      price: 1999,
       image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=800',
       description: 'Spacious room with modern amenities and a beautiful view.',
       features: ['King-sized bed', 'City view', 'Free Wi-Fi', '40" Smart TV', 'Coffee machine']
@@ -40,7 +40,7 @@ const Booking = () => {
     {
       id: 'executive',
       name: 'Executive Suite',
-      price: 299,
+      price: 2999,
       image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=800',
       description: 'Luxurious suite with separate living area and premium facilities.',
       features: ['King-sized bed', 'Separate living room', 'Mini bar', '55" Smart TV', 'Jacuzzi']
@@ -48,7 +48,7 @@ const Booking = () => {
     {
       id: 'presidential',
       name: 'Presidential Suite',
-      price: 499,
+      price: 4999,
       image: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=800',
       description: 'The pinnacle of luxury with panoramic views and butler service.',
       features: ['King-sized bed', 'Panoramic view', 'Private butler', '65" Smart TV', 'Private terrace']
@@ -146,7 +146,7 @@ const Booking = () => {
                             />
                             <label htmlFor={room.id} className="ml-2 flex-1 cursor-pointer">
                               <span className="block font-bold text-lg text-gray-800">{room.name}</span>
-                              <span className="block text-indigo-600 font-bold">${room.price} / night</span>
+                              <span className="block text-indigo-600 text-xl font-bold">Rs.{room.price} <span className='text-base text-indigo-400'>/night</span></span>
                             </label>
                           </div>
                         </div>
@@ -253,18 +253,18 @@ const Booking = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between text-gray-600">
                       <span>Room Charge:</span>
-                      <span>${selectedRoom.price} / night</span>
+                      <span>Rs.{selectedRoom.price} <span>/ night</span></span>
                     </div>
                     
                     <div className="flex justify-between text-gray-600">
                       <span>Taxes & Fees:</span>
-                      <span>${Math.round(selectedRoom.price * 0.15)}</span>
+                      <span>Rs.{Math.round(selectedRoom.price * 0.15)}</span>
                     </div>
                     
                     <div className="pt-3 border-t mt-3">
                       <div className="flex justify-between font-bold text-lg">
                         <span>Total:</span>
-                        <span>${selectedRoom.price + Math.round(selectedRoom.price * 0.15)}</span>
+                        <span>Rs.{selectedRoom.price + Math.round(selectedRoom.price * 0.15)}</span>
                       </div>
                       <p className="text-sm text-gray-500 mt-2">* Price shown is for one night</p>
                     </div>

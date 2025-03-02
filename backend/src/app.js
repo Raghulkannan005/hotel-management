@@ -21,6 +21,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up routes
+app.get('/', (req, res) => {
+    res.send('API is running...');
+});
+
+app.get('/health', (req, res) => {
+    res.status(200).send('API is healthy');
+})
+
 app.use('/api/auth', authRoutes);
 app.use('/api/rooms', roomRoutes);
 app.use('/api/bookings', bookingRoutes);

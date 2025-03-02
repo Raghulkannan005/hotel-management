@@ -67,8 +67,8 @@ const Contact = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-gray-800">Our Location</h3>
-                <p className="text-gray-600">123 Luxury Lane</p>
-                <p className="text-gray-600">Paradise City, PC 12345</p>
+                <p className="text-gray-600">123, Dubai Cross Street </p>
+                <p className="text-gray-600">Dubai Main Road, Dubai</p>
               </div>
               
               {/* Phone */}
@@ -79,8 +79,7 @@ const Contact = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-gray-800">Phone Number</h3>
-                <p className="text-gray-600">Reservations: +1 (555) 123-4567</p>
-                <p className="text-gray-600">Customer Service: +1 (555) 987-6543</p>
+                <p className="text-gray-600">+91 96776 05417</p>
               </div>
               
               {/* Email */}
@@ -91,8 +90,8 @@ const Contact = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-gray-800">Email Address</h3>
+                <p className="text-gray-600">raghulkannan005@gmail.com</p>
                 <p className="text-gray-600">info@zorphotel.com</p>
-                <p className="text-gray-600">reservations@zorphotel.com</p>
               </div>
             </div>
             
