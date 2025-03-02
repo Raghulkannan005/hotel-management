@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 import authRoutes from './routes/authRoutes.js';
 import roomRoutes from './routes/roomRoutes.js';
@@ -8,9 +9,12 @@ import bookingRoutes from './routes/bookingRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import errorMiddleware from './middlewares/errorMiddleware.js';
 
+const app = express();
 dotenv.config();
 
-const app = express();
+app.use(cors({
+    origin: "http://localhost:5173",
+}));
 
 // Middleware
 app.use(bodyParser.json());
