@@ -1,17 +1,39 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { isAuthenticated, logoutUser } from '../services/authService';
 
 const Nav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
+    
+    const checkAuthStatus = () => {
+      setIsLoggedIn(isAuthenticated());
+    };
+    
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Check auth status on mount and whenever localStorage changes
+    checkAuthStatus();
+    window.addEventListener('storage', checkAuthStatus);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('storage', checkAuthStatus);
+    };
   }, []);
+  
+  const handleLogout = () => {
+    logoutUser();
+    setIsLoggedIn(false);
+    setIsMobileMenuOpen(false);
+    window.location.href = '/';
+  };
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
@@ -27,7 +49,23 @@ const Nav = () => {
           <Link to="/" className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-indigo-600 font-medium transition-colors`}>Home</Link>
           <Link to="/about" className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-indigo-600 font-medium transition-colors`}>About</Link>
           <Link to="/contact" className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-indigo-600 font-medium transition-colors`}>Contact</Link>
-          <Link to="/booking" className="bg-indigo-600 text-white px-5 py-2 rounded-md hover:bg-indigo-700 transition-colors font-medium">Book Now</Link>
+          
+          {isLoggedIn ? (
+            <>
+              <Link to="/dashboard" className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-indigo-600 font-medium transition-colors`}>Dashboard</Link>
+              <button
+                onClick={handleLogout}
+                className="bg-indigo-600 text-white px-5 py-2 rounded-md hover:bg-indigo-700 transition-colors font-medium"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-indigo-600 font-medium transition-colors`}>Login</Link>
+              <Link to="/booking" className="bg-indigo-600 text-white px-5 py-2 rounded-md hover:bg-indigo-700 transition-colors font-medium">Book Now</Link>
+            </>
+          )}
         </div>
 
         {/* Mobile menu button */}
@@ -52,7 +90,23 @@ const Nav = () => {
             <Link to="/" className="block text-gray-800 hover:text-indigo-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
             <Link to="/about" className="block text-gray-800 hover:text-indigo-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
             <Link to="/contact" className="block text-gray-800 hover:text-indigo-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
-            <Link to="/booking" className="block bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 text-center font-medium" onClick={() => setIsMobileMenuOpen(false)}>Book Now</Link>
+            
+            {isLoggedIn ? (
+              <>
+                <Link to="/dashboard" className="block text-gray-800 hover:text-indigo-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</Link>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left text-gray-800 hover:text-indigo-600 font-medium"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="block text-gray-800 hover:text-indigo-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Login</Link>
+                <Link to="/booking" className="block bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 text-center font-medium" onClick={() => setIsMobileMenuOpen(false)}>Book Now</Link>
+              </>
+            )}
           </div>
         </div>
       )}

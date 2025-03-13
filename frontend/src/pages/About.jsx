@@ -78,29 +78,29 @@ const About = () => {
           
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=500" alt="CEO" className="w-full h-64 object-cover" />
+              <img src="https://media.gq-magazine.co.uk/photos/62ac38f82da9f5f89. . ./4:3/w_1440,h_1080,c_limit/shah-rukh-khan-record-deal.jpeg" alt="CEO" className="w-full h-64 object-cover object-top" />
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-1 text-gray-800">Michael Reynolds</h3>
+                <h3 className="text-xl font-bold mb-1 text-gray-800">Shah Rukh Khan</h3>
                 <p className="text-indigo-600 mb-4">Chief Executive Officer</p>
-                <p className="text-gray-600">With over 20 years of experience in luxury hospitality, Michael leads our team with passion and vision.</p>
+                <p className="text-gray-600">With his charismatic leadership and visionary approach, Shah Rukh has transformed Zorp Hotel into a landmark of luxury hospitality.</p>
               </div>
             </div>
             
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=500" alt="Operations Director" className="w-full h-64 object-cover" />
+              <img src="https://m.media-amazon.com/images/M/MV5BMjAxNTM4MDcyN15BMl5BanBnXkFtZTcwMjg4NDgwNA@@._V1_.jpg" alt="Operations Director" className="w-full h-64 object-cover object-top" />
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-1 text-gray-800">Sarah Johnson</h3>
+                <h3 className="text-xl font-bold mb-1 text-gray-800">Priyanka Chopra</h3>
                 <p className="text-indigo-600 mb-4">Director of Operations</p>
-                <p className="text-gray-600">Sarah ensures that every aspect of our hotel runs smoothly to deliver an exceptional guest experience.</p>
+                <p className="text-gray-600">Priyanka's international expertise and attention to detail ensures that every aspect of our hotel runs with precision and excellence.</p>
               </div>
             </div>
             
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=500" alt="Culinary Director" className="w-full h-64 object-cover" />
+              <img src="https://starsunfolded.com/wp-content/uploads/2016/01/Sanjeev-Kapoor-1.jpg" alt="Culinary Director" className="w-full h-64 object-cover object-top" />
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-1 text-gray-800">Antoine Dubois</h3>
+                <h3 className="text-xl font-bold mb-1 text-gray-800">Sanjeev Kapoor</h3>
                 <p className="text-indigo-600 mb-4">Culinary Director</p>
-                <p className="text-gray-600">A world-renowned chef bringing culinary excellence and innovation to our dining experiences.</p>
+                <p className="text-gray-600">India's most celebrated chef brings his culinary mastery to create unforgettable dining experiences that blend tradition with innovation.</p>
               </div>
             </div>
           </div>
