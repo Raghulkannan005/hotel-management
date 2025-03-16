@@ -18,6 +18,15 @@ export const searchRooms = async (queryParams) => {
   }
 };
 
+export const getFeaturedRooms = async () => {
+  try {
+    const response = await api.get('/rooms/featured');
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { message: 'Failed to fetch featured rooms' };
+  }
+};
+
 export const getRoomById = async (roomId) => {
   try {
     const response = await api.get(`/rooms/${roomId}`);

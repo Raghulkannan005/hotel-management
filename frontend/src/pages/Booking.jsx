@@ -321,21 +321,38 @@ const Booking = () => {
                         className={`border p-4 rounded-lg cursor-pointer transition ${formData.roomId === room._id ? 'border-indigo-600 ring-2 ring-indigo-200' : 'border-gray-200 hover:border-indigo-300'}`}
                         onClick={() => setFormData(prev => ({ ...prev, roomId: room._id }))}
                       >
-                        <div className="flex items-center">
-                          <input 
-                            type="radio"
-                            name="roomId"
-                            id={room._id}
-                            value={room._id}
-                            checked={formData.roomId === room._id}
-                            onChange={handleChange}
-                            className="w-4 h-4 text-indigo-600 focus:ring-indigo-500"
-                          />
-                          <label htmlFor={room._id} className="ml-2 flex-1 cursor-pointer">
-                            <span className="block font-bold text-lg text-gray-800">{room.type}</span>
-                            <p className="text-gray-600 mb-2">{room.description}</p>
-                            <span className="block text-indigo-600 text-xl font-bold">Rs.{room.price} <span className='text-base text-indigo-400'>/night</span></span>
-                          </label>
+                        <div className="flex flex-col md:flex-row gap-4">
+                          <div className="md:w-1/4">
+                            <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
+                              <img 
+                                src={room.images?.[0] || 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'} 
+                                alt={room.type} 
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80";
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <div className="md:w-3/4">
+                            <div className="flex items-center">
+                              <input 
+                                type="radio"
+                                name="roomId"
+                                id={room._id}
+                                value={room._id}
+                                checked={formData.roomId === room._id}
+                                onChange={handleChange}
+                                className="w-4 h-4 text-indigo-600 focus:ring-indigo-500"
+                              />
+                              <label htmlFor={room._id} className="ml-2 flex-1 cursor-pointer">
+                                <span className="block font-bold text-lg text-gray-800">{room.type}</span>
+                                <p className="text-gray-600 mb-2">{room.description}</p>
+                                <span className="block text-indigo-600 text-xl font-bold">Rs.{room.price} <span className='text-base text-indigo-400'>/night</span></span>
+                              </label>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     ))
@@ -457,10 +474,49 @@ const Booking = () => {
             <p className="text-gray-600 mb-6">Thank you for choosing Zorp Hotel. Your booking has been confirmed.</p>
             <p className="text-gray-600 mb-2">Booking Details:</p>
             <div className="bg-gray-50 p-4 rounded-lg mb-6 inline-block text-left">
+              <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden mb-4">
+                <img 
+                  src={selectedRoom.images?.[0] || 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'} 
+                  alt={selectedRoom.type} 
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80";
+                  }}
+                />
+              </div>
               <p className="text-gray-700"><span className="font-semibold">Room:</span> {selectedRoom.type}</p>
               <p className="text-gray-700"><span className="font-semibold">Check-in:</span> {new Date(formData.startDate).toLocaleDateString()}</p>
               <p className="text-gray-700"><span className="font-semibold">Check-out:</span> {new Date(formData.endDate).toLocaleDateString()}</p>
               <p className="text-gray-700"><span className="font-semibold">Total:</span> Rs.{total}</p>
+            </div>
+            <div className="space-y-3">
+              {formData.startDate && formData.endDate && (
+                <div className="flex justify-between text-gray-600">
+                  <span>Stay Duration:</span>
+                  <span>{stayDuration} {stayDuration === 1 ? 'Night' : 'Nights'}</span>
+                </div>
+              )}
+              
+              <div className="flex justify-between text-gray-600">
+                <span>Room Charge:</span>
+                <span>Rs.{roomCharge || selectedRoom.price || 0}</span>
+              </div>
+              
+              <div className="flex justify-between text-gray-600">
+                <span>Taxes & Fees:</span>
+                <span>Rs.{taxes || 0}</span>
+              </div>
+              
+              <div className="pt-3 border-t mt-3">
+                <div className="flex justify-between font-bold text-lg">
+                  <span>Total:</span>
+                  <span>Rs.{total || 0}</span>
+                </div>
+                {stayDuration > 0 && (
+                  <p className="text-sm text-gray-500 mt-2">* Price shown is for {stayDuration} {stayDuration === 1 ? 'night' : 'nights'}</p>
+                )}
+              </div>
             </div>
             <p className="text-gray-600 mb-6">We've sent a confirmation email to {formData.email} with all the details.</p>
             <button 
@@ -519,6 +575,17 @@ const Booking = () => {
                     
                     {selectedRoom && Object.keys(selectedRoom).length > 0 ? (
                       <div className="mb-6">
+                        <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden mb-4">
+                          <img 
+                            src={selectedRoom.images?.[0] || 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'} 
+                            alt={selectedRoom.type} 
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80";
+                            }}
+                          />
+                        </div>
                         <h3 className="text-xl font-bold text-gray-800 mb-2">{selectedRoom.type || 'Selected Room'}</h3>
                         <p className="text-gray-600 mb-4">{selectedRoom.description || 'Room details loading...'}</p>
                         

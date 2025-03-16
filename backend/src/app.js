@@ -13,11 +13,15 @@ import { sanitizeRequestBody } from './middlewares/sanitizationMiddleware.js';
 const app = express();
 dotenv.config();
 
+// Configure CORS for both development and production
 app.use(cors({
     origin: [
-        "http://localhost:5173",
+        "http://localhost:5173", 
         "https://zorp-hotel.vercel.app"
-    ]
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Middleware

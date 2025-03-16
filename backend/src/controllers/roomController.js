@@ -19,9 +19,33 @@ export const searchRooms = async (req, res, next) => {
     }
 };
 
+export const getFeaturedRooms = async (req, res, next) => {
+    try {
+        const rooms = await Room.find({ featured: true }).limit(6);
+        res.status(200).json(rooms);
+    } catch (error) {
+        next(error);
+    }
+};
+
 export const createRoom = async (req, res, next) => {
     try {
-        const room = new Room(req.body);
+        // Extract room data from request body
+        const { type, price, description, capacity, size, amenities, images, availability, featured } = req.body;
+        
+        // Create room with all possible fields
+        const room = new Room({
+            type,
+            price,
+            description,
+            capacity,
+            size,
+            amenities: amenities || [],
+            images: images || [],
+            availability: availability !== undefined ? availability : true,
+            featured: featured !== undefined ? featured : false
+        });
+        
         await room.save();
         res.status(201).json(room);
     } catch (error) {

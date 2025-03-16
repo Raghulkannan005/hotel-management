@@ -11,10 +11,16 @@ import 'react-toastify/dist/ReactToastify.css';
 const RoomsManagement = ({ rooms, onRefresh }) => {
   const [editingRoom, setEditingRoom] = useState(null);
   const [roomForm, setRoomForm] = useState({
+    _id: '',
     type: '',
     price: '',
     description: '',
-    availability: true
+    capacity: 2,
+    size: 300,
+    amenities: '',
+    images: '',
+    availability: true,
+    featured: false
   });
   
   const [newRoomForm, setNewRoomForm] = useState({
@@ -27,26 +33,43 @@ const RoomsManagement = ({ rooms, onRefresh }) => {
   const handleEditRoom = (room) => {
     setEditingRoom(room._id);
     setRoomForm({
+      _id: room._id,
       type: room.type,
       price: room.price,
       description: room.description || '',
-      availability: room.availability
+      capacity: room.capacity || 2,
+      size: room.size || 300,
+      amenities: room.amenities?.join(', ') || '',
+      images: room.images?.join(', ') || '',
+      availability: room.availability !== undefined ? room.availability : true,
+      featured: room.featured !== undefined ? room.featured : false
     });
   };
   
   const handleCancelEdit = () => {
     setEditingRoom(null);
     setRoomForm({
+      _id: '',
       type: '',
       price: '',
       description: '',
-      availability: true
+      capacity: 2,
+      size: 300,
+      amenities: '',
+      images: '',
+      availability: true,
+      featured: false
     });
   };
   
   const handleRoomUpdate = async (roomId) => {
     try {
-      await updateRoom(roomId, roomForm);
+      const formattedRoom = {
+        ...roomForm,
+        amenities: roomForm.amenities.split(',').map(item => item.trim()).filter(Boolean),
+        images: roomForm.images.split(',').map(item => item.trim()).filter(Boolean)
+      };
+      await updateRoom(roomId, formattedRoom);
       toast.success('Room updated successfully');
       setEditingRoom(null);
       onRefresh();

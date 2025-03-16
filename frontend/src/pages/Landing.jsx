@@ -1,10 +1,63 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from "../components/Nav";
+import { getFeaturedRooms } from '../services/roomService';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Landing = () => {
+  const [featuredRooms, setFeaturedRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        setLoading(true);
+        const roomsData = await getFeaturedRooms();
+        setFeaturedRooms(roomsData);
+      } catch (error) {
+        console.error('Error fetching rooms:', error);
+        toast.error('Failed to load rooms. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchRooms();
+  }, []);
+
+  // If there are no featured rooms, use these default ones
+  const defaultRooms = [
+    {
+      _id: 'default1',
+      type: 'Maharaja Deluxe Room',
+      description: 'Spacious room with royal Indian decor and modern amenities.',
+      price: 2999,
+      images: ['https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800']
+    },
+    {
+      _id: 'default2',
+      type: 'Rajputana Suite',
+      description: 'Luxurious suite with separate living area and traditional Rajasthani elements.',
+      price: 4999,
+      images: ['https://media-cdn.tripadvisor.com/media/photo-s/03/f1/89/b5/itc-rajputana-jaipur.jpg']
+    },
+    {
+      _id: 'default3',
+      type: 'Taj Presidential Suite',
+      description: 'Our finest accommodation with panoramic views and dedicated butler service.',
+      price: 7999,
+      images: ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800']
+    }
+  ];
+
+  // Use featured rooms from API if available, otherwise use default rooms
+  const displayRooms = featuredRooms.length > 0 ? featuredRooms : defaultRooms;
+
   return (
     <>
       <Nav />
+      <ToastContainer position="top-right" autoClose={5000} />
       
       <section className="relative h-screen flex items-center">
         <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
@@ -72,55 +125,34 @@ const Landing = () => {
           <h2 className="text-3xl font-serif font-bold text-center mb-4 text-white">Our <span className="text-amber-400">Premium Rooms</span></h2>
           <p className="text-center text-gray-300 mb-16 max-w-2xl mx-auto">Choose from our selection of luxury rooms and suites, each designed to offer you the ultimate comfort during your stay.</p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Room 1 */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all border border-white/10 group">
-              <div className="relative overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800" alt="Maharaja Room" className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent opacity-70"></div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 text-white">Maharaja Deluxe Room</h3>
-                <p className="text-gray-300 mb-4">Spacious room with royal Indian decor and modern amenities.</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-amber-400 font-bold">Rs.2999 / night</span>
-                  <Link to="/booking" className="bg-amber-500 text-indigo-900 px-4 py-2 rounded-md hover:bg-amber-400 transition-colors shadow-md transform hover:-translate-y-1 hover:shadow-lg">Book Now</Link>
-                </div>
-              </div>
+          {loading ? (
+            <div className="flex justify-center py-12">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-amber-400"></div>
             </div>
-
-            {/* Room 2 */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all border border-white/10 group">
-              <div className="relative overflow-hidden">
-                <img src="https://media-cdn.tripadvisor.com/media/photo-s/03/f1/89/b5/itc-rajputana-jaipur.jpg" alt="Executive Suite" className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent opacity-70"></div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 text-white">Rajputana Suite</h3>
-                <p className="text-gray-300 mb-4">Luxurious suite with separate living area and traditional Rajasthani elements.</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-amber-400 font-bold">Rs.4999 / night</span>
-                  <Link to="/booking" className="bg-amber-500 text-indigo-900 px-4 py-2 rounded-md hover:bg-amber-400 transition-colors shadow-md transform hover:-translate-y-1 hover:shadow-lg">Book Now</Link>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {displayRooms.map(room => (
+                <div key={room._id} className="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all border border-white/10 group">
+                  <div className="relative overflow-hidden">
+                    <img 
+                      src={room.images?.[0] || "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"} 
+                      alt={room.type} 
+                      className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent opacity-70"></div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2 text-white">{room.type}</h3>
+                    <p className="text-gray-300 mb-4 line-clamp-2">{room.description}</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-amber-400 font-bold">₹{room.price} / night</span>
+                      <Link to="/booking" className="bg-amber-500 text-indigo-900 px-4 py-2 rounded-md hover:bg-amber-400 transition-colors shadow-md transform hover:-translate-y-1 hover:shadow-lg">Book Now</Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-
-            {/* Room 3 */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all border border-white/10 group">
-              <div className="relative overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800" alt="Presidential Suite" className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent opacity-70"></div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 text-white">Taj Presidential Suite</h3>
-                <p className="text-gray-300 mb-4">Our finest accommodation with panoramic views and dedicated butler service.</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-amber-400 font-bold">Rs.7999 / night</span>
-                  <Link to="/booking" className="bg-amber-500 text-indigo-900 px-4 py-2 rounded-md hover:bg-amber-400 transition-colors shadow-md transform hover:-translate-y-1 hover:shadow-lg">Book Now</Link>
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </section>
 

@@ -20,7 +20,18 @@ export const getAllUsers = async () => {
 
 export const createRoom = async (roomData) => {
   try {
-    const response = await api.post('/admin/rooms', roomData);
+    // Format room data to match the backend schema
+    const formattedData = {
+      ...roomData,
+      amenities: Array.isArray(roomData.amenities) 
+        ? roomData.amenities 
+        : roomData.amenities?.split(',').map(item => item.trim()).filter(Boolean) || [],
+      images: Array.isArray(roomData.images) 
+        ? roomData.images 
+        : roomData.images?.split(',').map(item => item.trim()).filter(Boolean) || []
+    };
+    
+    const response = await api.post('/admin/rooms', formattedData);
     return response.data;
   } catch (error) {
     throw error.response?.data || { message: 'Failed to create room' };
@@ -29,7 +40,18 @@ export const createRoom = async (roomData) => {
 
 export const updateRoom = async (roomId, roomData) => {
   try {
-    const response = await api.put(`/admin/rooms/${roomId}`, roomData);
+    // Format room data to match the backend schema
+    const formattedData = {
+      ...roomData,
+      amenities: Array.isArray(roomData.amenities) 
+        ? roomData.amenities 
+        : roomData.amenities?.split(',').map(item => item.trim()).filter(Boolean) || [],
+      images: Array.isArray(roomData.images) 
+        ? roomData.images 
+        : roomData.images?.split(',').map(item => item.trim()).filter(Boolean) || []
+    };
+    
+    const response = await api.put(`/admin/rooms/${roomId}`, formattedData);
     return response.data;
   } catch (error) {
     throw error.response?.data || { message: 'Failed to update room' };
@@ -70,7 +92,7 @@ export const updateBooking = async (bookingId, bookingData) => {
   } catch (error) {
     throw error.response?.data || { message: 'Failed to update booking' };
   }
-}; 
+};
 
 export const getAllRooms = async () => {
   try {
