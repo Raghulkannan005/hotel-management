@@ -51,77 +51,71 @@ const Login = () => {
       <ToastContainer position="top-right" autoClose={5000} />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-indigo-50">
+      <section className="pt-32 pb-20 bg-gradient-to-b from-purple-900 to-indigo-900">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-6">Login to Your Account</h1>
-            <p className="text-xl text-gray-600 mb-8">Welcome back! Sign in to access your bookings and manage your stays.</p>
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
+              Login to Your <span className="text-amber-400">Account</span>
+            </h1>
+            <p className="text-xl text-gray-300 mb-8">Welcome back! Sign in to access your bookings and manage your stays.</p>
           </div>
         </div>
       </section>
 
       {/* Login Form Section */}
-      <section className="py-16">
+      <section className="py-16 bg-gradient-to-b from-indigo-900 to-purple-900">
         <div className="container mx-auto px-4">
-          <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
+          <div className="max-w-md mx-auto bg-white/10 backdrop-blur-sm rounded-lg shadow-xl p-8 border border-white/10">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-gray-700 mb-2">Email Address</label>
+                <label className="block text-white mb-2 font-medium">Email Address</label>
                 <input 
                   type="email" 
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-200 focus:border-indigo-600 outline-none transition"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring focus:ring-amber-300/50 focus:border-amber-400 outline-none transition text-white"
                   placeholder="Enter your email"
                 />
               </div>
               
               <div>
-                <label className="block text-gray-700 mb-2">Password</label>
+                <label className="block text-white mb-2 font-medium">Password</label>
                 <input 
                   type="password" 
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-200 focus:border-indigo-600 outline-none transition"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:ring focus:ring-amber-300/50 focus:border-amber-400 outline-none transition text-white"
                   placeholder="Enter your password"
                 />
               </div>
               
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input 
-                    type="checkbox" 
-                    id="remember" 
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                  />
-                  <label htmlFor="remember" className="ml-2 block text-sm text-gray-700">
-                    Remember me
-                  </label>
-                </div>
-                
-                <div className="text-sm">
-                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                    Forgot your password?
-                  </a>
-                </div>
+              <div className="flex items-center">
+                <input 
+                  type="checkbox" 
+                  id="remember" 
+                  className="h-4 w-4 text-amber-500 focus:ring-amber-400 border-white/30 rounded"
+                />
+                <label htmlFor="remember" className="ml-2 block text-sm text-gray-300">
+                  Remember me
+                </label>
               </div>
               
               <button 
                 type="submit" 
                 disabled={isLoading}
-                className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors disabled:bg-indigo-400 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-indigo-900 py-3 px-4 rounded-lg font-medium hover:from-amber-400 hover:to-amber-500 transition-all disabled:from-amber-400/70 disabled:to-amber-500/70 disabled:cursor-not-allowed shadow-lg transform hover:-translate-y-1 uppercase tracking-wider"
               >
                 {isLoading ? 'Signing in...' : 'Sign In'}
               </button>
               
               <div className="text-center mt-4">
-                <p className="text-gray-600">
+                <p className="text-gray-300">
                   Don't have an account? 
-                  <Link to="/register" className="ml-1 text-indigo-600 hover:text-indigo-500 font-medium">
+                  <Link to="/register" className="ml-1 text-amber-400 hover:text-amber-300 font-medium">
                     Sign up
                   </Link>
                 </p>

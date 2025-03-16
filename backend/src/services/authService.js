@@ -16,3 +16,22 @@ export const login = async ({ email, password }) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     return token;
 };
+
+export const changePassword = async (userId, { currentPassword, newPassword }) => {
+    const user = await User.findById(userId);
+    
+    if (!user) {
+        throw new Error('User not found');
+    }
+    
+    // Verify current password
+    if (!(await user.matchPassword(currentPassword))) {
+        throw new Error('Current password is incorrect');
+    }
+    
+    // Update password
+    user.password = newPassword;
+    await user.save();
+    
+    return { message: 'Password changed successfully' };
+};

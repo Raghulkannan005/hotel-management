@@ -41,6 +41,15 @@ export const getUserProfile = async () => {
   }
 };
 
+export const changePassword = async (passwordData) => {
+  try {
+    const response = await api.post('/auth/change-password', passwordData);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { message: 'Failed to change password' };
+  }
+};
+
 export const isAuthenticated = () => {
   return localStorage.getItem('token') !== null;
 };

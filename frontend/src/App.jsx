@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react';
-import { isAuthenticated } from './services/authService';
+import { isAuthenticated, getCurrentUser } from './services/authService';
 import Landing from './pages/Landing'
 import About from './pages/About'
 import Contact from './pages/Contact'
@@ -8,11 +8,27 @@ import Booking from './pages/Booking'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
+import AdminDashboard from './pages/AdminDashboard'
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
   const isAuth = isAuthenticated();
   return isAuth ? children : <Navigate to="/login" />;
+};
+
+// Admin route component
+const AdminRoute = ({ children }) => {
+  const isAuth = isAuthenticated();
+  if (!isAuth) {
+    return <Navigate to="/login" />;
+  }
+  
+  const user = getCurrentUser();
+  if (user?.role !== 'admin') {
+    return <Navigate to="/dashboard" />;
+  }
+  
+  return children;
 };
 
 const App = () => {
@@ -44,6 +60,14 @@ const App = () => {
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin" 
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
           } 
         />
       </Routes>

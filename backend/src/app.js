@@ -8,6 +8,7 @@ import roomRoutes from './routes/roomRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import errorMiddleware from './middlewares/errorMiddleware.js';
+import { sanitizeRequestBody } from './middlewares/sanitizationMiddleware.js';
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(cors({
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(sanitizeRequestBody);
 
 // Set up routes
 app.get('/', (req, res) => {
