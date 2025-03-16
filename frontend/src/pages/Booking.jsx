@@ -244,6 +244,11 @@ const Booking = () => {
   const { roomCharge, taxes, total } = calculateTotalPrice();
   const stayDuration = calculateStayDuration();
 
+  // Add this function to handle image errors
+  const handleImageError = (e) => {
+    e.target.src = "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg";
+  };
+
   // Define steps
   const renderStepContent = () => {
     switch (currentStep) {
@@ -325,13 +330,10 @@ const Booking = () => {
                           <div className="md:w-1/4">
                             <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
                               <img 
-                                src={room.images?.[0] || 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'} 
+                                src={room.images?.[0] || "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg"} 
                                 alt={room.type} 
                                 className="w-full h-full object-cover"
-                                onError={(e) => {
-                                  e.target.onerror = null;
-                                  e.target.src = "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80";
-                                }}
+                                onError={handleImageError}
                               />
                             </div>
                           </div>
@@ -476,13 +478,10 @@ const Booking = () => {
             <div className="bg-gray-50 p-4 rounded-lg mb-6 inline-block text-left">
               <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden mb-4">
                 <img 
-                  src={selectedRoom.images?.[0] || 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'} 
+                  src={selectedRoom.images?.[0] || "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg"} 
                   alt={selectedRoom.type} 
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80";
-                  }}
+                  onError={handleImageError}
                 />
               </div>
               <p className="text-gray-700"><span className="font-semibold">Room:</span> {selectedRoom.type}</p>
@@ -577,13 +576,10 @@ const Booking = () => {
                       <div className="mb-6">
                         <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden mb-4">
                           <img 
-                            src={selectedRoom.images?.[0] || 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'} 
+                            src={selectedRoom.images?.[0] || "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg"} 
                             alt={selectedRoom.type} 
                             className="w-full h-full object-cover"
-                            onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src = "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80";
-                            }}
+                            onError={handleImageError}
                           />
                         </div>
                         <h3 className="text-xl font-bold text-gray-800 mb-2">{selectedRoom.type || 'Selected Room'}</h3>

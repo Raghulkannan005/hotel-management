@@ -9,6 +9,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import AdminDashboard from './pages/AdminDashboard'
+import NotFound from './pages/notFound'
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -70,6 +71,7 @@ const App = () => {
             </AdminRoute>
           } 
         />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

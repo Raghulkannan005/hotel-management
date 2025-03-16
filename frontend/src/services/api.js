@@ -2,13 +2,18 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 // Create axios instance with base URL
-const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
+// Remove /api prefix if using the deployed backend
+const apiPrefix = baseURL.includes('vercel.app') ? '' : '/api';
 
 const api = axios.create({
-  baseURL,
+  baseURL: `${baseURL}${apiPrefix}`,
   headers: {
     'Content-Type': 'application/json',
   },
+  // Disable credentials for CORS
+  withCredentials: false
 });
 
 // Request interceptor to add auth token to requests
@@ -18,9 +23,16 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    
+    // Log request for debugging
+    console.log('API Request:', config.method.toUpperCase(), config.url);
+    
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    console.error('Request Error:', error);
+    return Promise.reject(error);
+  }
 );
 
 // Response interceptor to handle errors
@@ -33,6 +45,16 @@ api.interceptors.response.use(
       message: error.response?.data?.message || 'An unexpected error occurred',
       errors: error.response?.data?.errors || []
     };
+    
+    // Log error for debugging
+    console.error('API Error:', errorResponse);
+    
+    // Handle CORS errors
+    if (error.message === 'Network Error') {
+      console.error('Network Error Details:', error);
+      toast.error('Network error: Could not connect to the server. This might be a CORS issue.');
+      return Promise.reject({ message: 'Network error: Could not connect to the server' });
+    }
     
     // Handle specific error codes
     if (errorResponse.status === 401) {
@@ -55,10 +77,10 @@ api.interceptors.response.use(
       } else {
         toast.error(errorResponse.message);
       }
+    } else {
+      // Generic error message
+      toast.error(errorResponse.message);
     }
-    
-    // Log error for debugging
-    console.error('API Error:', errorResponse);
     
     return Promise.reject(errorResponse);
   }

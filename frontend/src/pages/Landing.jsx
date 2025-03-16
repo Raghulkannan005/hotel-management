@@ -26,28 +26,39 @@ const Landing = () => {
     fetchRooms();
   }, []);
 
-  // If there are no featured rooms, use these default ones
+  // Default room data if no featured rooms are available
   const defaultRooms = [
     {
       _id: 'default1',
-      type: 'Maharaja Deluxe Room',
-      description: 'Spacious room with royal Indian decor and modern amenities.',
-      price: 2999,
-      images: ['https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800']
+      type: 'Deluxe Room',
+      price: 199,
+      description: 'Spacious room with modern amenities and a beautiful view.',
+      images: ['https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg'],
+      capacity: 2
     },
     {
       _id: 'default2',
-      type: 'Rajputana Suite',
-      description: 'Luxurious suite with separate living area and traditional Rajasthani elements.',
-      price: 4999,
-      images: ['https://media-cdn.tripadvisor.com/media/photo-s/03/f1/89/b5/itc-rajputana-jaipur.jpg']
+      type: 'Executive Suite',
+      price: 299,
+      description: 'Luxurious suite with separate living area and premium amenities.',
+      images: ['https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg'],
+      capacity: 2
     },
     {
       _id: 'default3',
-      type: 'Taj Presidential Suite',
-      description: 'Our finest accommodation with panoramic views and dedicated butler service.',
-      price: 7999,
-      images: ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800']
+      type: 'Family Room',
+      price: 249,
+      description: 'Comfortable room designed for families with extra space and amenities.',
+      images: ['https://images.pexels.com/photos/2507016/pexels-photo-2507016.jpeg'],
+      capacity: 4
+    },
+    {
+      _id: 'default4',
+      type: 'Presidential Suite',
+      price: 499,
+      description: 'Our most luxurious accommodation with exclusive services and amenities.',
+      images: ['https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg'],
+      capacity: 2
     }
   ];
 
@@ -135,7 +146,7 @@ const Landing = () => {
                 <div key={room._id} className="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all border border-white/10 group">
                   <div className="relative overflow-hidden">
                     <img 
-                      src={room.images?.[0] || "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"} 
+                      src={room.images?.[0] || "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg"} 
                       alt={room.type} 
                       className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500" 
                     />

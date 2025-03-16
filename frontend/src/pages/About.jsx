@@ -21,7 +21,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2">
-              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1000" alt="Hotel History" className="rounded-lg shadow-lg w-full" />
+              <img src="https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg" alt="Hotel History" className="rounded-lg shadow-lg w-full" />
             </div>
             <div className="md:w-1/2">
               <h2 className="text-3xl font-serif font-bold text-gray-800 mb-6">Our History</h2>
@@ -78,7 +78,7 @@ const About = () => {
           
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-              <img src="https://media.gq-magazine.co.uk/photos/62ac38f82da9f5f89. . ./4:3/w_1440,h_1080,c_limit/shah-rukh-khan-record-deal.jpeg" alt="CEO" className="w-full h-64 object-cover object-top" />
+              <img src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg" alt="CEO" className="w-full h-64 object-cover object-top" />
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-1 text-gray-800">Shah Rukh Khan</h3>
                 <p className="text-indigo-600 mb-4">Chief Executive Officer</p>
@@ -87,7 +87,7 @@ const About = () => {
             </div>
             
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-              <img src="https://m.media-amazon.com/images/M/MV5BMjAxNTM4MDcyN15BMl5BanBnXkFtZTcwMjg4NDgwNA@@._V1_.jpg" alt="Operations Director" className="w-full h-64 object-cover object-top" />
+              <img src="https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg" alt="Operations Director" className="w-full h-64 object-cover object-top" />
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-1 text-gray-800">Priyanka Chopra</h3>
                 <p className="text-indigo-600 mb-4">Director of Operations</p>
@@ -96,7 +96,7 @@ const About = () => {
             </div>
             
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-              <img src="https://starsunfolded.com/wp-content/uploads/2016/01/Sanjeev-Kapoor-1.jpg" alt="Culinary Director" className="w-full h-64 object-cover object-top" />
+              <img src="https://images.pexels.com/photos/3814446/pexels-photo-3814446.jpeg" alt="Culinary Director" className="w-full h-64 object-cover object-top" />
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-1 text-gray-800">Sanjeev Kapoor</h3>
                 <p className="text-indigo-600 mb-4">Culinary Director</p>

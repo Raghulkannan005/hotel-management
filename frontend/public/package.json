@@ -1,0 +1,12 @@
+{
+  "name": "cors-test",
+  "version": "1.0.0",
+  "description": "Simple CORS testing script",
+  "main": "test-cors.js",
+  "scripts": {
+    "test": "node test-cors.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+} 
