@@ -9,7 +9,7 @@ const roomSchema = new mongoose.Schema({
     amenities: [String],
     images: {
         type: [String],
-        default: ['https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80']
+        default: ['https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg']
     },
     availability: { type: Boolean, default: true },
     featured: { type: Boolean, default: false }, // Featured rooms appear on landing page
@@ -19,7 +19,7 @@ const roomSchema = new mongoose.Schema({
 // Ensure the model returns placeholder image if no images provided
 roomSchema.pre('save', function(next) {
     if (!this.images || this.images.length === 0) {
-        this.images = ['https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'];
+        this.images = ['https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg'];
     }
     next();
 });

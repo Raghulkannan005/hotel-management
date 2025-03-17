@@ -2,6 +2,11 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
 const authMiddleware = async (req, res, next) => {
+    // Skip authentication for OPTIONS requests (CORS preflight)
+    if (req.method === 'OPTIONS') {
+        return next();
+    }
+    
     const authHeader = req.header('Authorization');
     
     if (!authHeader) {

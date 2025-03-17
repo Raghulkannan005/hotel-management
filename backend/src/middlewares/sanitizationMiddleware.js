@@ -1,4 +1,9 @@
 export const sanitizeRequestBody = (req, res, next) => {
+  // Skip sanitization for OPTIONS requests (CORS preflight)
+  if (req.method === 'OPTIONS') {
+    return next();
+  }
+  
   if (req.body) {
     const sanitized = {};
     

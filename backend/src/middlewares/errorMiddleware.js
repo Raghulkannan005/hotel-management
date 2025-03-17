@@ -2,6 +2,19 @@ const errorMiddleware = (err, req, res, next) => {
     // Log the error for debugging (but not in production response)
     console.error('Error:', err);
     
+    // Handle CORS errors
+    if (err.message === 'Not allowed by CORS') {
+        return res.status(403).json({
+            success: false,
+            message: 'CORS error: Origin not allowed'
+        });
+    }
+    
+    // Handle OPTIONS requests with a 200 OK response
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    
     // Default error status and message
     const status = err.statusCode || 500;
     
