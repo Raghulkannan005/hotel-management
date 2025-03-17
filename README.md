@@ -58,49 +58,86 @@ A modern hotel management system with both user and admin interfaces, allowing u
     └── package.json     # Frontend dependencies
 ```
 
-## Getting Started
+To help beginners get started with your Hotel Management System project, I'll provide a step-by-step guide on setting up the development environment, including the installation of Visual Studio Code, Git, and Node.js. This guide will also cover cloning the repository and running the project locally.
 
-### Prerequisites
-- Node.js (v14+)
-- MongoDB
+### Getting Started Guide for Beginners
 
-### Installation
+#### Prerequisites
 
-1. Clone the repository
-```bash
-git clone <repository-url>
-cd hotel-management
-```
+1. **Visual Studio Code (VS Code)**
+   - Download and install VS Code from the [official website](https://code.visualstudio.com/).
+   - Follow the installation instructions for your operating system.
 
-2. Install backend dependencies and start the server
-```bash
-cd backend
-npm install
-# Create a .env file with necessary credentials (see .env.example)
-npm run dev
-```
+2. **Git**
+   - Download and install Git from the [official website](https://git-scm.com/).
+   - Follow the installation instructions for your operating system.
+   - After installation, open a terminal or command prompt and run `git --version` to verify the installation.
 
-3. Install frontend dependencies and start the development server
-```bash
-cd frontend
-npm install
-# Create a .env file if needed
-npm run dev
-```
+3. **Node.js**
+   - Download and install Node.js from the [official website](https://nodejs.org/).
+   - Choose the LTS (Long Term Support) version for stability.
+   - After installation, open a terminal or command prompt and run `node -v` and `npm -v` to verify the installation.
 
-## Environment Variables
+#### Project Setup
 
-### Backend (.env)
-```
-PORT=3000
-DATABASE_URL=mongodb://localhost:27017/hotel-management
-JWT_SECRET=your_jwt_secret_key
-```
+1. **Clone the Repository**
+   - Open a terminal or command prompt.
+   - Navigate to the directory where you want to clone the project.
+   - Run the following command to clone the repository:
+     ```bash
+     git clone https://github.com/Raghulkannan005/hotel-management.git
+     cd hotel-management
+     ```
 
-### Frontend (.env)
-```
-VITE_API_URL=http://localhost:3000/api
-```
+2. **Backend Setup**
+   - Navigate to the backend directory:
+     ```bash
+     cd backend
+     ```
+   - Install the backend dependencies:
+     ```bash
+     npm install
+     ```
+   - Create a `.env` file in the `backend` directory with the necessary environment variables. You can use the `.env.example` file as a reference:
+     ```plaintext
+     PORT=3000
+     DATABASE_URL=your_mongodb_url
+     JWT_SECRET=your_jwt_secret_key
+     ```
+   - Start the backend server:
+     ```bash
+     npm run dev
+     ```
+
+3. **Frontend Setup**
+   - Open a new terminal or command prompt.
+   - Navigate to the frontend directory:
+     ```bash
+     cd frontend
+     ```
+   - Install the frontend dependencies:
+     ```bash
+     npm install
+     ```
+   - Create a `.env` file in the `frontend` directory if needed. You can use the `.env.example` file as a reference:
+     ```plaintext
+     VITE_API_URL=http://localhost:3000/api
+     ```
+   - Start the frontend development server:
+     ```bash
+     npm run dev
+     ```
+
+#### Running the Project
+
+- Once both the backend and frontend servers are running, open a web browser and navigate to `http://localhost:5173` to view the application.
+
+#### Additional Tips
+
+- **VS Code Extensions**: Consider installing useful extensions like Prettier for code formatting, ESLint for linting, and GitLens for enhanced Git capabilities.
+- **MongoDB**: Ensure you have access to a MongoDB instance. You can use a local installation or a cloud service like MongoDB Atlas.
+
+This guide should help beginners set up and run the Hotel Management System project locally. If you have any questions or encounter issues, feel free to ask for further assistance!
 
 ## API Endpoints
 
